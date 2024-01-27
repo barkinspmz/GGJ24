@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: CameraSortingLayer
+    uniqueID: 3015908951
+    locked: 0
+  - name: Player
+    uniqueID: 1200577423
+    locked: 0

@@ -43,7 +43,9 @@ public class DialogueOpener : MonoBehaviour
         }
 
         yield return new WaitForSeconds(_waitingSecondCloseCinematic);
-
-        DialogueManager.Instance.CloseDialogueCinematic();
+        if (DialogueManager.Instance.isCinematicActive)
+        {
+            DialogueManager.Instance.CloseDialogueCinematic();
+        }
     }
 }

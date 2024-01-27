@@ -29,6 +29,11 @@ public class PlayerMovement : MonoBehaviour
         {
             _rb2D.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && DialogueManager.Instance.isCinematicActive)
+        {
+            DialogueManager.Instance.CloseDialogueCinematic();
+        }
     }
 
     private void FixedUpdate()

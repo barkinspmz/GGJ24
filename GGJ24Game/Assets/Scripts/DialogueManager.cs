@@ -18,7 +18,7 @@ public class DialogueManager : MonoBehaviour
     public delegate void ZoomOutCamera();
     public event ZoomOutCamera ZoomOutCam;
 
-
+    public bool isCinematicActive = false;
     private void Awake()
     {
         Instance = this;
@@ -26,12 +26,14 @@ public class DialogueManager : MonoBehaviour
 
     public void OpenDialogueCinematic()
     {
+        isCinematicActive = true;
         OnOpenPlayersDialogue();
         ZoomInCam();
     }
 
     public void CloseDialogueCinematic()
     {
+        isCinematicActive = false;
         OnClosePlayersDialogue();
         ZoomOutCam();
     }

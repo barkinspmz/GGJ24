@@ -17,7 +17,6 @@ public class PlayersDialogue : MonoBehaviour
 
     void ClosePlayerDialogueHUD()
     {
-        GameObject.Find("DialogueText").GetComponent<TextMeshProUGUI>().text = null;
         GameObject.Find("PlayerDialogueCanvas").transform.GetChild(0).gameObject.SetActive(false);
     }
 }
