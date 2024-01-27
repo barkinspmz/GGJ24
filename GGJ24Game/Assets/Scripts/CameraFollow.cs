@@ -12,6 +12,8 @@ public class CameraFollow : MonoBehaviour
     {
         _cam = GetComponent<CinemachineVirtualCamera>();
         _newZoomOutPos = GetComponent<CinemachineVirtualCamera>().Follow;
+        DialogueManager.Instance.ZoomInCam += ZoomIn;
+        DialogueManager.Instance.ZoomOutCam += ZoomOut;
     }
 
     void ZoomIn()
@@ -37,7 +39,7 @@ public class CameraFollow : MonoBehaviour
         for (int i = 0; i <= 20; i++)
         {
             yield return new WaitForSeconds(0.01f);
-            _cam.m_Lens.OrthographicSize -= 0.07f;
+            _cam.m_Lens.OrthographicSize -= 0.05f;
         }
     }
 
@@ -46,7 +48,7 @@ public class CameraFollow : MonoBehaviour
         for (int i = 0; i <= 20; i++)
         {
             yield return new WaitForSeconds(0.01f);
-            _cam.m_Lens.OrthographicSize += 0.07f;
+            _cam.m_Lens.OrthographicSize += 0.05f;
         }
     }
 }

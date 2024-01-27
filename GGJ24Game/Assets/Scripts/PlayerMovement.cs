@@ -18,13 +18,14 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _rb2D = GetComponent<Rigidbody2D>();
+        DialogueManager.Instance.ZoomInCam += LockPlayerMovement; 
+        DialogueManager.Instance.ZoomOutCam += UnlockPlayerMovement;
     }
 
     
     void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        if (Input.GetKeyDown(KeyCode.Space) &&_canMove && Physics2D.OverlapCircle(feetPos.position, 0.3f, floorMask))
+        if (Input.GetKeyDown(KeyCode.Space) &&_canMove && Physics2D.OverlapCircle(feetPos.position, 0.1f, floorMask))
         {
             _rb2D.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
         }
@@ -32,9 +33,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        horizontalInput = Input.GetAxis("Horizontal");
         if (_canMove)
         {
             _rb2D.velocity = new Vector2(horizontalInput * _playerMovementSpeed, _rb2D.velocity.y);
         }
+    }
+
+    private void LockPlayerMovement()
+    {
+        _canMove = false;
+    }
+
+    private void UnlockPlayerMovement()
+    {
+        _canMove = true;
     }
 }
