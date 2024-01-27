@@ -19,7 +19,6 @@ public class EndOfTheLevel : MonoBehaviour
         {
             //This can lock the player movement and occur the other events.
             endOfLevel();
-            Debug.Log("Wprlll");
         }
     }
 
