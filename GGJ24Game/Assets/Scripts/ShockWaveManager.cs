@@ -22,7 +22,8 @@ public class ShockWaveManager : MonoBehaviour
 
     public void CallShockWave()
     {
-        _shockWaveCoroutine = StartCoroutine(ShockWaveAction(-0.1f,2));
+        _shockWaveCoroutine = StartCoroutine(ShockWaveAction(-0.1f,12));
+        CameraFollow.Instance.ShakeCamera(3f,0.8f);
     }
 
     public IEnumerator ShockWaveAction(float startPos, float endPos)

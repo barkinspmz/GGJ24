@@ -12,6 +12,8 @@ public class TappingE : MonoBehaviour
 
     private bool isRunning = false;
     private bool isEnding = false;
+
+    [SerializeField] private Animator[] _bangAnims;
     void Start()
     {
         
@@ -40,7 +42,7 @@ public class TappingE : MonoBehaviour
         while (_eButtonClickBG.fillAmount > 0)
         {
             _eButtonClickBG.fillAmount -= 0.05f;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.1f);
             if (_eButtonClickBG.fillAmount <= 0)
             {
                 _eButtonClickBG.fillAmount = 0;
@@ -54,8 +56,20 @@ public class TappingE : MonoBehaviour
         StopCoroutine(ReverseFillingEButton());
         _eButtonClickBG.fillAmount = 1;
         _animSuccesfull.SetTrigger("Succes");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         ShockWaveManager.Instance.CallShockWave();
+        var randomNumber = Random.Range(0, _bangAnims.Length);
+        for (int i = 0; i < _bangAnims.Length; i++)
+        {
+            if (randomNumber == i)
+            {
+                continue;
+            }
+            else
+            {
+                _bangAnims[i].SetTrigger("Bang");
+            }
+        }
         _eButtonClickBG.fillAmount = 0;
         _animSuccesfull.SetTrigger("End");
         yield return new WaitForSeconds(cooldownTime);

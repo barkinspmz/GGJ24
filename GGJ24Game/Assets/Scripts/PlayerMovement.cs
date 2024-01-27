@@ -15,9 +15,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask floorMask;
 
     private bool _canMove = true;
+
+    private Animator _animator;
     void Start()
     {
         _rb2D = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
         DialogueManager.Instance.ZoomInCam += LockPlayerMovement; 
         DialogueManager.Instance.ZoomOutCam += UnlockPlayerMovement;
     }
@@ -33,6 +36,20 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && DialogueManager.Instance.isCinematicActive)
         {
             DialogueManager.Instance.CloseDialogueCinematic();
+        }
+        if (horizontalInput > 0 && _canMove)
+        {
+            transform.localScale = new Vector2(1,1);
+            _animator.SetBool("Move",true);
+        }
+        else if (horizontalInput < 0 && _canMove)
+        {
+            transform.localScale = new Vector2(-1, 1);
+            _animator.SetBool("Move", true);
+        }
+        else
+        {
+            _animator.SetBool("Move", false);
         }
     }
 
