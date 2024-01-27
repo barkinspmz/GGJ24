@@ -57,7 +57,12 @@ public class TappingE : MonoBehaviour
         _eButtonClickBG.fillAmount = 1;
         _animSuccesfull.SetTrigger("Succes");
         yield return new WaitForSeconds(0.2f);
+        CircleChallange.Instance.eClicked = true;
         ShockWaveManager.Instance.CallShockWave();
+        if (CircleChallange.Instance.isNarrowing)
+        {
+            CircleChallange.Instance.ExpandCircle();
+        }
         var randomNumber = Random.Range(0, _bangAnims.Length);
         for (int i = 0; i < _bangAnims.Length; i++)
         {

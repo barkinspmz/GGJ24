@@ -34,7 +34,7 @@ public class ShockWaveManager : MonoBehaviour
 
         float elapsedTime = 0f;
         while (elapsedTime < _shockWaveTime) 
-        {
+        {  
             elapsedTime += Time.deltaTime;
 
             lerpedAmount = Mathf.Lerp(startPos, endPos, (elapsedTime / _shockWaveTime));
