@@ -56,9 +56,9 @@ public class CircleChallange : MonoBehaviour
         while (canNarrow)
         {
             isNarrowing = false;
-            finishedNarrowing = false;
             clickEIndicator.SetActive(false);
             yield return new WaitForSeconds(narrowCooldown);
+            finishedNarrowing = false;
             isNarrowing = true;
             Debug.Log("Narrowing");
             clickEIndicator.SetActive(true);
@@ -69,8 +69,8 @@ public class CircleChallange : MonoBehaviour
                 yield return new WaitForSeconds(narrowingTimeByTime);
                 transform.localScale -= new Vector3(0.01F,0.01F);
             }
-            finishedNarrowing = true;
             eClicked = false;
+            finishedNarrowing = true;
         }
         
     }

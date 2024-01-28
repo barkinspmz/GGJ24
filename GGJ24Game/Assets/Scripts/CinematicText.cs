@@ -38,6 +38,8 @@ public class CinematicText : MonoBehaviour
         }
         changeSceneObj.SetTrigger("BlackIn");
         yield return new WaitForSeconds(_waitingSecondCloseCinematic);
+        if(SceneManager.GetActiveScene().buildIndex == 1)
         SceneManager.LoadScene(2);
+        
     }
 }

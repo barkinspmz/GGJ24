@@ -19,6 +19,8 @@ public class DialogueManager : MonoBehaviour
     public event ZoomOutCamera ZoomOutCam;
 
     public bool isCinematicActive = false;
+
+    public bool isClickedEsc = false;
     private void Awake()
     {
         Instance = this;

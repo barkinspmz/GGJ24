@@ -20,9 +20,15 @@ public class TappingE : MonoBehaviour
     [SerializeField] private Animator[] _pressEIndicatorsAnim;
 
     [SerializeField] private GameObject obstacleDestroyer;
+
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip eClick;
+    [SerializeField] private AudioClip eClickSucces;
+    [SerializeField] private AudioClip shockWaveSound;
     void Start()
     {
         _anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -33,6 +39,7 @@ public class TappingE : MonoBehaviour
             {
                 foreach (var anim in _pressEIndicatorsAnim) { anim.SetTrigger("Click"); }
             }
+            audioSource.PlayOneShot(eClick);
             _anim.SetTrigger("Click");
             _eButtonClickBG.fillAmount += 0.2f;
             if (_eButtonClickBG.fillAmount>=1)
@@ -68,9 +75,11 @@ public class TappingE : MonoBehaviour
         _eButtonClickBG.fillAmount = 1;
         _animSuccesfull.SetTrigger("Succes");
         obstacleDestroyer.SetActive(true);
+        audioSource.PlayOneShot(eClickSucces);
         yield return new WaitForSeconds(0.2f);
         CircleChallange.Instance.eClicked = true;
         ShockWaveManager.Instance.CallShockWave();
+        audioSource.PlayOneShot(shockWaveSound);
         if (CircleChallange.Instance.isNarrowing || CircleChallange.Instance.finishedNarrowing)
         {
             CircleChallange.Instance.ExpandCircle();

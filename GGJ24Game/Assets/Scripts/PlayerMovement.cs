@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && DialogueManager.Instance.isCinematicActive)
         {
             DialogueManager.Instance.CloseDialogueCinematic();
+            DialogueManager.Instance.isClickedEsc = true;
         }
         if (horizontalInput > 0 && _canMove)
         {
