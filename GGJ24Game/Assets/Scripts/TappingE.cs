@@ -14,15 +14,26 @@ public class TappingE : MonoBehaviour
     private bool isEnding = false;
 
     [SerializeField] private Animator[] _bangAnims;
+
+    [SerializeField] private Animator _anim;
+
+    [SerializeField] private Animator[] _pressEIndicatorsAnim;
+
+    [SerializeField] private GameObject obstacleDestroyer;
     void Start()
     {
-        
+        _anim = GetComponent<Animator>();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && !isEnding)
         {
+            if (CircleChallange.Instance.isNarrowing)
+            {
+                foreach (var anim in _pressEIndicatorsAnim) { anim.SetTrigger("Click"); }
+            }
+            _anim.SetTrigger("Click");
             _eButtonClickBG.fillAmount += 0.2f;
             if (_eButtonClickBG.fillAmount>=1)
             {
@@ -56,10 +67,11 @@ public class TappingE : MonoBehaviour
         StopCoroutine(ReverseFillingEButton());
         _eButtonClickBG.fillAmount = 1;
         _animSuccesfull.SetTrigger("Succes");
+        obstacleDestroyer.SetActive(true);
         yield return new WaitForSeconds(0.2f);
         CircleChallange.Instance.eClicked = true;
         ShockWaveManager.Instance.CallShockWave();
-        if (CircleChallange.Instance.isNarrowing)
+        if (CircleChallange.Instance.isNarrowing || CircleChallange.Instance.finishedNarrowing)
         {
             CircleChallange.Instance.ExpandCircle();
         }
@@ -80,5 +92,7 @@ public class TappingE : MonoBehaviour
         yield return new WaitForSeconds(cooldownTime);
         isRunning = false;
         isEnding = false;
+        yield return new WaitForSeconds(1f);
+        obstacleDestroyer.SetActive(false);
     }
 }

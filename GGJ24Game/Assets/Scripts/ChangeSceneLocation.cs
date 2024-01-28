@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class ChangeSceneLocation : MonoBehaviour
 {
     [SerializeField] private float _timeForWaitingChangeScene = 2f;
+    public int otherSceneIndex = 3;
     private void Start()
     {
         EndOfTheLevel.Instance.endOfLevel += ChangeScene;
@@ -28,7 +29,6 @@ public class ChangeSceneLocation : MonoBehaviour
     IEnumerator WaitingBeforeChangingScene()
     {
         yield return new WaitForSeconds(_timeForWaitingChangeScene);
-        var sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(sceneIndex++);
+        SceneManager.LoadScene(otherSceneIndex);
     }
 }

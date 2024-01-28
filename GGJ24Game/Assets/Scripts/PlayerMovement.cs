@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _canMove = true;
 
     private Animator _animator;
+    [SerializeField] private GameObject _pressEKey;
     void Start()
     {
         _rb2D = GetComponent<Rigidbody2D>();
@@ -40,11 +41,13 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalInput > 0 && _canMove)
         {
             transform.localScale = new Vector2(1,1);
+            _pressEKey.transform.localScale = new Vector2(1, 1);
             _animator.SetBool("Move",true);
         }
         else if (horizontalInput < 0 && _canMove)
         {
             transform.localScale = new Vector2(-1, 1);
+            _pressEKey.transform.localScale = new Vector2(-1, 1);
             _animator.SetBool("Move", true);
         }
         else

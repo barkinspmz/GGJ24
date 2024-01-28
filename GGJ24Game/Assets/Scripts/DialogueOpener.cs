@@ -29,7 +29,6 @@ public class DialogueOpener : MonoBehaviour
         yield return new WaitForSeconds(1f);
         for (int i = 0; i < texts.Length; i++)
         {
-            playerText.text = "Seeker: ";
             foreach (var a in texts[i])
             {
                 playerText.text += a.ToString();

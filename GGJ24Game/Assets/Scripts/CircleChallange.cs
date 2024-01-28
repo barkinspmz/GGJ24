@@ -16,6 +16,12 @@ public class CircleChallange : MonoBehaviour
 
     public bool eClicked = false;
 
+    public bool finishedNarrowing = false;
+
+    [SerializeField] private GameObject clickEIndicator;
+
+    [SerializeField] private GameObject[] textsWhileNarrowing;
+
     private void Awake()
     {
         Instance = this;
@@ -32,6 +38,7 @@ public class CircleChallange : MonoBehaviour
     public void ExpandCircle()
     {
         StartCoroutine(ExpandingCirle());
+        foreach (var obj in textsWhileNarrowing) { obj.SetActive(false); }
     }
 
     public IEnumerator ExpandingCirle()
@@ -49,17 +56,22 @@ public class CircleChallange : MonoBehaviour
         while (canNarrow)
         {
             isNarrowing = false;
+            finishedNarrowing = false;
+            clickEIndicator.SetActive(false);
             yield return new WaitForSeconds(narrowCooldown);
             isNarrowing = true;
-            while (transform.localScale.x > 0 && transform.localScale.y > 0 && !eClicked)
+            Debug.Log("Narrowing");
+            clickEIndicator.SetActive(true);
+            foreach(var obj in textsWhileNarrowing) { obj.SetActive(true); }
+            eClicked = false;
+            while (transform.localScale.x > 0.09 && transform.localScale.y > 0.09 && !eClicked)
             {
                 yield return new WaitForSeconds(narrowingTimeByTime);
                 transform.localScale -= new Vector3(0.01F,0.01F);
             }
+            finishedNarrowing = true;
             eClicked = false;
         }
-        yield return new WaitForSeconds(3f);
-        var currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex);
+        
     }
 }
