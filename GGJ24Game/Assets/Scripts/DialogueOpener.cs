@@ -18,7 +18,7 @@ public class DialogueOpener : MonoBehaviour
     AudioSource audSrc;
 
     public AudioClip OpenHUDSound;
-
+    public bool isEscClicked = false;
     private void Start()
     {
         audSrc = GetComponent<AudioSource>();
@@ -36,22 +36,19 @@ public class DialogueOpener : MonoBehaviour
         }
     }
 
-    IEnumerator DialogueFlow()
+    public IEnumerator DialogueFlow()
     {
         yield return new WaitForSeconds(1f);
         for (int i = 0; i < texts.Length; i++)
         {
-            if (!DialogueManager.Instance.isClickedEsc)
+            foreach (var a in texts[i])
             {
-                foreach (var a in texts[i])
-                {
-                    playerText.text += a.ToString();
+                playerText.text += a.ToString();
 
-                    audSrc.pitch = Random.Range(0.9f, 1.0f);
-                    audSrc.PlayOneShot(TypeSound);
-                    if (i.ToString() == "." || i.ToString() == "?") { yield return new WaitForSeconds(1f); }
-                    else { yield return new WaitForSeconds(_waitingSecondBetweenTextChars); }
-                }
+                audSrc.pitch = Random.Range(0.9f, 1.0f);
+                audSrc.PlayOneShot(TypeSound);
+                if (i.ToString() == "." || i.ToString() == "?") { yield return new WaitForSeconds(1f); }
+                else { yield return new WaitForSeconds(_waitingSecondBetweenTextChars); }
             }
 
             yield return new WaitForSeconds(_waitingSecondBetweenDialogues);
@@ -64,6 +61,5 @@ public class DialogueOpener : MonoBehaviour
         {
             DialogueManager.Instance.CloseDialogueCinematic();
         }
-        DialogueManager.Instance.isClickedEsc = false;
     }
 }

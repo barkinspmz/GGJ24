@@ -43,7 +43,7 @@ public class CircleChallange : MonoBehaviour
 
     public IEnumerator ExpandingCirle()
     {
-        while (transform.localScale.x >= baseCurrentLocalScale.x && transform.localScale.y >= baseCurrentLocalScale.y)
+        while (transform.localScale.x <= baseCurrentLocalScale.x && transform.localScale.y <= baseCurrentLocalScale.y)
         {
             yield return new WaitForSeconds(0.05f);
             transform.localScale += new Vector3(0.1F, 0.1F);
@@ -64,7 +64,7 @@ public class CircleChallange : MonoBehaviour
             clickEIndicator.SetActive(true);
             foreach(var obj in textsWhileNarrowing) { obj.SetActive(true); }
             eClicked = false;
-            while (transform.localScale.x > 0.09 && transform.localScale.y > 0.09 && !eClicked)
+            while (transform.localScale.x > 0.08 && transform.localScale.y > 0.08 && !eClicked)
             {
                 yield return new WaitForSeconds(narrowingTimeByTime);
                 transform.localScale -= new Vector3(0.01F,0.01F);

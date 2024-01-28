@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator _animator;
     [SerializeField] private GameObject _pressEKey;
+
     void Start()
     {
         _rb2D = GetComponent<Rigidbody2D>();
@@ -32,12 +33,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) &&_canMove && Physics2D.OverlapCircle(feetPos.position, 0.1f, floorMask))
         {
             _rb2D.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape) && DialogueManager.Instance.isCinematicActive)
-        {
-            DialogueManager.Instance.CloseDialogueCinematic();
-            DialogueManager.Instance.isClickedEsc = true;
         }
         if (horizontalInput > 0 && _canMove)
         {
